@@ -1,0 +1,38 @@
+{
+  "id": "django-with-redis",
+  "name": "Django with Redis",
+  "description": "Python Django KV API backed by Redis, ready to deploy on Magic Containers.",
+  "icon": "code",
+  "containers": [
+    {
+      "name": "app",
+      "imageNamespace": "ghcr.io",
+      "imageName": "<your-username>/mc-template-django-with-redis",
+      "imageTag": "latest",
+      "environmentVariables": [
+        {
+          "name": "REDIS_URL",
+          "value": "redis://redis:6379"
+        }
+      ],
+      "endpoints": [
+        {
+          "displayName": "HTTP",
+          "type": "CDN",
+          "containerPort": 8000
+        }
+      ]
+    },
+    {
+      "name": "redis",
+      "imageNamespace": "docker.io",
+      "imageName": "redis",
+      "imageTag": "7-alpine",
+      "persistentVolumes": [
+        {
+          "mountPath": "/data"
+        }
+      ]
+    }
+  ]
+}
